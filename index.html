@@ -79,14 +79,17 @@
 
 
       let subTotal = entree1 + entree2 + entree3
+      subTotal = Math.round(subTotal * 100) / 100
       let printSubTotal = `Entree 1: ${entree1} + Entree 2: ${entree2} + Entree 3: ${entree3} = Subtotal: ${subTotal}`;
       document.querySelector('#first').innerHTML = printSubTotal;
 
       let total = (subTotal * (1 + tax / 100));
+      total = Math.round(total * 100) / 100;
       let printTotal = `Total: ${total}`;
       document.querySelector('#second').innerHTML = printTotal;
 
       let totalTip = total * (1 + tip / 100);
+      totalTip = Math.round(totalTip * 100) / 100;
       let printTotalTip = `Total Plus Tip: ${totalTip} `;
       document.querySelector('#third').innerHTML = printTotalTip;
 

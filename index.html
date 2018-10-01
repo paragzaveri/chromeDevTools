@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Chrome Debugging</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    h1 {
+      font-size: 1.5em
+    }
+    h4 {
+      display: inline-block
+    }
+
+    input,
+    button {
+      min-width: 72px;
+      min-height: 36px;
+      border: 1px solid green;
+    }
+
+    label,
+    input,
+    button {
+      display: block;
+    }
+
+    input {
+      margin-bottom: 1em;
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1>Debugging a Tip Calculator</h1>
+  <label for="item1">Entree 1</label>
+  <input placeholder="Entree 1" id="item1">
+  <label for="item2">Entree 2</label>
+  <input placeholder="Entree 2" id="item2">
+  <label for="item3">Entree 3</label>
+  <input placeholder="Entree 3" id="item3">
+  <label for="tax">Tax</label>
+  <input placeholder="Tax Percentage" id="tax">
+  <label for="tip">Tip</label>
+  <h4>10%<input type="radio" name="tip" placeholder="10%" id="10"></h4>
+  <h4>15%<input type="radio" name="tip" placeholder="15%" id="15"></h4>
+  <h4>20%<input type="radio" name="tip" placeholder="20%" id="20"></h4>
+  <button>Calculate Bill</button>
+  <br />
+  <label for="total">Total Price</label>
+  <p id='first'></p>
+  <p id='second'></p>
+  <p id='third'></p>
+  <script>
+
+
+
+    function onClick() {
+      if (emptyInput()) {
+        output.textContent = 'Error: one or more inputs are empty';
+        return;
+      }
+      outputResults();
+    }
+    function emptyInput() {
+      if (getEntree1() === '' || getEntree2() === '' || getEntree3() === '') {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    function outputResults() {
+      let entree1 = getEntree1();
+      let entree2 = getEntree2();
+      let entree3 = getEntree3();
+      let tax = getTax();
+      let tip = getTip();
+
+
+      let subTotal = entree1 + entree2 + entree3
+      let printSubTotal = `Entree 1: ${entree1} + Entree 2: ${entree2} + Entree 3: ${entree3} = Subtotal: ${subTotal}`;
+      document.querySelector('#first').innerHTML = printSubTotal;
+
+      let total = (subTotal * (1 + tax / 100));
+      let printTotal = `Total: ${total}`;
+      document.querySelector('#second').innerHTML = printTotal;
+
+      let totalTip = total * (1 + tip / 100);
+      let printTotalTip = `Total Plus Tip: ${totalTip} `;
+      document.querySelector('#third').innerHTML = printTotalTip;
+
+
+    }
+    function getEntree1() {
+      return document.querySelector('#item1').value;
+    }
+    function getEntree2() {
+      return document.querySelector('#item2').value;
+    }
+    function getEntree3() {
+      return document.querySelector('#item3').value;
+    }
+    function getTax() {
+      return document.querySelector('#tax').value;
+    }
+    function getTip() {
+      if (document.getElementById('10')) {
+        return .1
+      } else if (document.getElementById('15')) {
+        return .15
+      } else if (document.getElementById('20')) {
+        return .20
+      }
+    }
+    let output = document.querySelector('p');
+    let button = document.querySelector('button');
+    button.addEventListener('click', onClick);
+
+  </script>
+</body>
+
+</html>

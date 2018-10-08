@@ -107,11 +107,11 @@
       return document.querySelector('#tax').value;
     }
     function getTip() {
-      if (document.getElementById('10')) {
+      if (document.getElementById('10').checked) {
         return 10
-      } else if (document.getElementById('15')) {
+      } else if (document.getElementById('15').checked) {
         return 15
-      } else if (document.getElementById('20')) {
+      } else if (document.getElementById('20').checked) {
         return 20
       }
     }
